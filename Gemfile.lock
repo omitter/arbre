@@ -3,7 +3,6 @@ PATH
   specs:
     arbre (1.4.0)
       activesupport (>= 3.0.0, < 7.1)
-      ruby2_keywords (>= 0.0.2, < 1.0)
 
 GEM
   remote: http://rubygems.org/
@@ -220,7 +219,6 @@ GEM
     rubocop-packaging (0.5.1)
       rubocop (>= 0.89, < 2.0)
     ruby-progressbar (1.11.0)
-    ruby2_keywords (0.0.5)
     sawyer (0.8.2)
       addressable (>= 2.3.5)
       faraday (> 0.8, < 2.0)

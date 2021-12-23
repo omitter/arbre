@@ -17,11 +17,21 @@ module Arbre
         end
       end
 
-      def method_missing(method, *args, &block)
-        if method.to_s == 'to_ary'
-          super
-        else
-          @element.__send__ method, *args, &block
+      if ::Gem::Version.new(::RUBY_VERSION) >= ::Gem::Version.new("2.7")
+        def method_missing(method, *args, **kwargs, &block)
+          if method.to_s == 'to_ary'
+            super
+          else
+            @element.__send__ method, *args, **kwargs, &block
+          end
+        end
+      else
+        def method_missing(method, *args, &block)
+          if method.to_s == 'to_ary'
+            super
+          else
+            @element.__send__ method, *args, &block
+          end
         end
       end
     end

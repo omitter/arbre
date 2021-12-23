@@ -31,11 +31,21 @@ module Arbre
           text_node form_builder.send(method, *args, &block)
         end
 
-        def method_missing(method, *args, &block)
-          if form_builder && form_builder.respond_to?(method)
-            proxy_call_to_form(method, *args, &block)
-          else
-            super
+        if ::Gem::Version.new(::RUBY_VERSION) >= ::Gem::Version.new("2.7")
+          def method_missing(method, *args, **kwargs, &block)
+            if form_builder && form_builder.respond_to?(method)
+              proxy_call_to_form(method, *args, **kwargs, &block)
+            else
+              super
+            end
+          end
+        else
+          def method_missing(method, *args, &block)
+            if form_builder && form_builder.respond_to?(method)
+              proxy_call_to_form(method, *args, &block)
+            else
+              super
+            end
           end
         end
 
